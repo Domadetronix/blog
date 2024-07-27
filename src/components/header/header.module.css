@@ -1,0 +1,47 @@
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  line-height: 28px;
+  align-items: center;
+  background-color: #fff;
+  height: 80px;
+  padding: 0 22px;
+  margin-bottom: 50px;
+}
+
+* {
+  font-size: inherit;
+}
+
+.header__account_in {
+  padding: 10px 20px;
+  background-color: unset;
+  border: none;
+}
+
+.active-link {
+  color: lightgray;
+  text-decoration: none;
+}
+
+.active-link .header__account_in {
+  padding: 6px 18px;
+  background-color: unset;
+  border: 1px solid #52C41A;
+  border-radius: 5px;
+  color: #52C41A;
+}
+
+.header__account {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.user-image {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
