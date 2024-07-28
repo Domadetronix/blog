@@ -11,7 +11,6 @@ import {
 
 export const fetchArticle = createAsyncThunk('articles/fetchArticle', async (data) => {
   const [id, token = ''] = data
-  console.log(id)
   const responce = await getArticle(id, token)
   return responce
 })

@@ -16,7 +16,6 @@ function ArticleHoc(id = '') {
   const { article } = useSelector((state) => state.articleReducer)
   useEffect(() => setError(errorArticle), [errorArticle, article])
   useEffect(() => setError(false), [article])
-  console.log(error, errorArticle)
   return error ? (
     <div className="error-message">Произошла ошибка, возможно такой статьи не существует</div>
   ) : (
