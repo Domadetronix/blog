@@ -54,10 +54,10 @@ export default function ArticleForm({
   }
 
   const handleAddTag = () => {
-    if (!tagArray.includes(tagValue)) {
+    if (!tagArray.includes(tagValue) && tagValue) {
       setTagArray([...tagArray, tagValue])
       setTagValue('')
-    } else setTagError('Повтор')
+    } else setTagError('Повтор или пустой тег')
   }
 
   const handleRemoveTag = (tag) => {
@@ -157,7 +157,7 @@ export default function ArticleForm({
               </fieldset>
               {tagError && (
                 <p className={cl['input-error']} role="alert">
-                  Теги не могут повторяться
+                  Теги не могут повторяться или быть пустыми
                 </p>
               )}
             </div>
