@@ -9,7 +9,6 @@ export const registrationUser = createAsyncThunk('user/registrationUser', async 
 })
 
 export const authorizeUser = createAsyncThunk('user/authorizeUser', async (user) => {
-  console.log(user)
   const responce = await userLogIn(user)
   if (responce.ok) localStorage.setItem({ user: user.json() })
   return responce
@@ -19,8 +18,6 @@ export const updateUser = createAsyncThunk('user/updateUser', async (newData) =>
   const [token, data] = newData
   const responce = await updateUserData(token, data)
   localStorage.setItem('user', JSON.stringify(responce.user))
-  console.log(responce.user)
-  console.log(responce)
   return responce.user
 })
 
@@ -57,6 +54,10 @@ const userSlice = createSlice({
       }
       localStorage.removeItem('user')
     },
+    clearUserLoadErr(state) {
+      state.isLoading = false
+      state.error = false
+    },
   },
   extraReducers: ({ addCase }) => {
     addCase(registrationUser.pending, (state) => {
@@ -72,6 +73,7 @@ const userSlice = createSlice({
     })
     // eslint-disable-next-line no-unused-vars
     addCase(registrationUser.rejected, (state) => {
+      state.isLoading = false
       state.error = 'Ошибка!!!'
     })
     addCase(authorizeUser.pending, (state) => {
@@ -88,7 +90,8 @@ const userSlice = createSlice({
     })
     // eslint-disable-next-line no-unused-vars
     addCase(authorizeUser.rejected, (state) => {
-      state.error = 'Ошибка!!!'
+      state.isLoading = false
+      state.error = 'email or password is invalid'
     })
     addCase(updateUser.pending, (state) => {
       state.isLoading = true
@@ -103,11 +106,12 @@ const userSlice = createSlice({
     })
     // eslint-disable-next-line no-unused-vars
     addCase(updateUser.rejected, (state) => {
+      state.isLoading = false
       state.error = 'Ошибка!!!'
     })
   },
 })
 
-export const { setUser, logOutUser } = userSlice.actions
+export const { setUser, clearUserLoadErr, logOutUser } = userSlice.actions
 
 export default userSlice.reducer

@@ -1,6 +1,7 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Pagination } from 'antd'
@@ -10,16 +11,24 @@ import { changePage, fetchArticles } from '../../store/article-list-reducer'
 
 export default function ArticleList() {
   const { articleList, currentPage, articlesCount } = useSelector((state) => state.articleListReducer)
+  const { changed, isLoading: isLoadingArticle } = useSelector((state) => state.articleReducer)
+  const { isLoading: isLoadingUser, user } = useSelector((state) => state.userReducer)
+  const { token = '' } = user
   const dispatch = useDispatch()
   const handlePageNum = (page) => dispatch(changePage(page))
   useEffect(() => {
-    dispatch(fetchArticles(currentPage))
-  }, [dispatch, currentPage])
+    dispatch(fetchArticles(token ? [currentPage, token] : [currentPage, '']))
+  }, [dispatch, changed, currentPage, token])
+  const [articles, setArticles] = useState(articleList)
+  useEffect(() => {
+    setArticles(articleList)
+  }, [articleList])
   return (
-    <>
+    <div>
+      {isLoadingUser || (isLoadingArticle && <div>Загрузка данных...</div>)}
       <div className={cl.articles}>
-        {articleList.length ? (
-          articleList.map((article) => (
+        {articles.length ? (
+          articles.map((article) => (
             <Link to={`/articles/${article.slug}`} key={article.slug}>
               <Article article={article} mode="list" />
             </Link>
@@ -40,6 +49,6 @@ export default function ArticleList() {
           handlePageNum(page)
         }}
       />
-    </>
+    </div>
   )
 }

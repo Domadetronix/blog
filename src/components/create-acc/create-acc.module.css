@@ -61,6 +61,12 @@
   color: #1890FF;
   outline: 2px solid #1890FF;
 }
+.form__item_input::-moz-placeholder {
+  color: rgb(191, 191, 191);
+}
+.form__item_input::placeholder {
+  color: rgb(191, 191, 191);
+}
 .form__item_checkbox {
   display: flex;
   margin-bottom: 21px;
@@ -139,4 +145,11 @@ label {
   font-weight: 400;
   line-height: 22px;
   margin: 0;
+}
+
+.error-message {
+  margin-bottom: 20px;
+  background-color: #fce4e4;
+  border: 1px solid #fcc2c3;
+  padding: 20px 30px;
 }

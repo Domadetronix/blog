@@ -1,12 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import cl from './create-acc.module.scss'
 import { registrationUser } from '../../store/user-reducer'
 
 export default function SignUp() {
+  const { error: errorUser } = useSelector((state) => state.userReducer)
+
   const {
     register,
     formState: { errors },
@@ -14,10 +17,11 @@ export default function SignUp() {
     handleSubmit,
   } = useForm()
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const [errorM, setErrorM] = useState(false)
+  useEffect(() => setErrorM(errorUser), [errorUser])
+  useEffect(() => setErrorM(false), [])
   const onSubmit = (data) => {
     dispatch(registrationUser({ username: data.name, email: data.mail, password: data.password }))
-    navigate('/sign-in')
   }
   const validateEmail = (email) => {
     const flag = String(email)
@@ -31,6 +35,7 @@ export default function SignUp() {
   const passwordDetect = (password) => password === watch('password')
   return (
     <div className={cl.container}>
+      {errorM ? <div className={cl['error-message']}>Пользователь с такими данными уже существует</div> : ''}
       <div className={cl.header}>Create new account</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={cl.form__item}>

@@ -20,20 +20,15 @@ export default function Header() {
 
   return (
     <header>
-      <NavLink
-        to="/articles"
-        className={(isActive) => `${setActive({ isActive })} ${classes.header__logo ? classes.header__logo : ''}`}
-      >
+      <NavLink to="/articles" className={(isActive) => `${setActive({ isActive })} ${classes.header__logo}`}>
         Realworld Blog
       </NavLink>
       <div className={classes.header__account}>
         {isAuth ? (
           <>
             <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `${setActive(isActive)} ${classes.header__account_in ? classes.header__account_in : ''}`
-              }
+              to="/new-article"
+              className={({ isActive }) => `${setActive(isActive)} ${classes.header__account_up}`}
             >
               Create article
             </NavLink>
@@ -50,7 +45,7 @@ export default function Header() {
               onClick={handleLogOut}
               to="/"
               className={({ isActive }) =>
-                `${setActive(isActive)} ${classes.header__account_in ? classes.header__account_in : ''}`
+                `${setActive(isActive)} ${classes.header__account_in ? classes.header__account_out : ''}`
               }
             >
               Log Out
@@ -61,7 +56,7 @@ export default function Header() {
             <NavLink
               to="/sign-in"
               className={({ isActive }) =>
-                `${setActive(isActive)} ${classes.header__account_in ? classes.header__account_in : ''}`
+                `${setActive(isActive)} ${classes.header__account_in ? classes.header__account_out : ''}`
               }
             >
               Sign In
@@ -69,7 +64,7 @@ export default function Header() {
             <NavLink
               to="/sign-up"
               className={({ isActive }) =>
-                `${setActive(isActive)} ${classes.header__account_in ? classes.header__account_in : ''}`
+                `${setActive(isActive)} ${classes.header__account_in ? classes.header__account_up : ''}`
               }
             >
               Sign Up

@@ -4,3 +4,15 @@
     flex-direction: column;
     gap: 26px;
 }
+
+.green-text {
+    text-decoration: underline;
+}
+
+.error-message {
+    margin-bottom: 20px;
+    background-color: #fce4e4;
+    border: 1px solid #fcc2c3;
+    padding: 20px 30px;
+
+}

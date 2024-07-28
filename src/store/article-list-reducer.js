@@ -2,8 +2,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getArticles } from '../services/blog-service'
 
-export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (page) => {
-  const responce = await getArticles(page)
+export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (data) => {
+  const [page, token] = data
+  const responce = await getArticles(page, token)
   return responce
 })
 
@@ -22,9 +23,9 @@ const articlesSlice = createSlice({
     changePage(state, action) {
       state.currentPage = action.payload
     },
-    setArticles(state, action) {
-      state.articleList = action.payload
-    },
+    // removeItemFromArticles(state, action) {
+    //   state.articleList = state.articleList.filter((item) => item.slug !== action.payload)
+    // },
   },
   extraReducers: ({ addCase }) => {
     addCase(fetchArticles.pending, (state) => {
@@ -43,6 +44,6 @@ const articlesSlice = createSlice({
   },
 })
 
-export const { setArticles, changePage } = articlesSlice.actions
+export const { removeItemFromArticles, changePage } = articlesSlice.actions
 
 export default articlesSlice.reducer

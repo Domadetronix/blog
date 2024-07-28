@@ -12,14 +12,14 @@ export default function EditProfile() {
     handleSubmit,
   } = useForm()
 
-  const { token } = useSelector((state) => state.userReducer.user)
+  const { token, email, username, image } = useSelector((state) => state.userReducer.user)
 
   const dispatch = useDispatch()
   const onSubmit = (data) => {
     dispatch(updateUser([token, { username: data.name, email: data.mail, password: data.password, image: data.image }]))
   }
-  const validateEmail = (email) => {
-    const flag = String(email)
+  const validateEmail = (mail) => {
+    const flag = String(mail)
       .toLowerCase()
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -51,6 +51,7 @@ export default function EditProfile() {
           <input
             className={cl.form__item_input}
             type="text"
+            defaultValue={username}
             placeholder="Username"
             {...register('name', { required: true, maxLength: 20, minLength: 3 })}
             aria-invalid={errors.name ? 'true' : 'false'}
@@ -66,7 +67,8 @@ export default function EditProfile() {
           <input
             className={cl.form__item_input}
             type="text"
-            placeholder="Email address"
+            defaultValue={email}
+            placeholder="Email"
             {...register('mail', { required: true, validate: { validateEmail } })}
             aria-invalid={errors.mail ? 'true' : 'false'}
           />
@@ -96,7 +98,8 @@ export default function EditProfile() {
           <input
             className={cl.form__item_input}
             type="text"
-            placeholder="Avatar image"
+            defaultValue={image}
+            placeholder="URL Image"
             {...register('image', { validate: isValidUrl })}
             aria-invalid={errors.image ? 'true' : 'false'}
           />

@@ -4,7 +4,7 @@ import ArticleHoc from '../components/article/hoc/article-hoc'
 
 function Articlepage() {
   const { id } = useParams()
-  return ArticleHoc(id, 'page')
+  return ArticleHoc(id)
 }
 
 export { Articlepage }

@@ -3,6 +3,10 @@
   width: 938px;
   padding: 15px 15px 22px 15px;
 }
+.article__author {
+  display: flex;
+  gap: 13px;
+}
 .article__info {
   display: flex;
   gap: 13px;
@@ -32,18 +36,34 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  max-width: 80%;
+  max-width: 75%;
 }
 .article__header_right {
   text-align: right;
   display: flex;
-  gap: 13px;
+  flex-direction: column;
+  gap: 30px;
+}
+.article__body {
+  min-height: 400px;
+}
+.article__button {
+  border: 1px solid rgb(245, 34, 45);
+  border-radius: 4px;
+  background-color: #fff;
+  color: rgb(245, 34, 45);
+  padding: 6px 18px;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: left;
+  height: auto;
 }
 .article__description {
   width: 700px;
   font-size: 12px;
   line-height: 22px;
   color: rgba(0, 0, 0, 0.75);
+  word-break: break-all;
 }
 
 .author-avatar {
@@ -57,4 +77,24 @@
   display: flex;
   flex-flow: wrap;
   gap: 8px;
+}
+
+.green-button {
+  border-color: rgb(82, 196, 26);
+  color: rgb(82, 196, 26);
+}
+
+.article-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: flex-end;
+  gap: 12px;
+}
+
+.red-heart {
+  color: red;
+}
+
+.white-heart {
+  color: black;
 }

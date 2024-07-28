@@ -2,23 +2,25 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import cl from '../create-acc/create-acc.module.scss'
 import { authorizeUser } from '../../store/user-reducer'
 
 export default function SignUp() {
+  const { error: errorUser } = useSelector((state) => state.userReducer)
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm()
-
+  const [errorM, setErrorM] = useState(false)
+  useEffect(() => setErrorM(errorUser), [errorUser])
+  useEffect(() => setErrorM(false), [])
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const onSubmit = (data) => {
     dispatch(authorizeUser({ email: data.mail, password: data.password }))
-    navigate('/')
   }
   const validateEmail = (email) => {
     const flag = String(email)
@@ -32,7 +34,8 @@ export default function SignUp() {
 
   return (
     <div className={cl.container}>
-      <div className={cl.header}>Create new account</div>
+      {errorM ? <div className={cl['error-message']}>Неправильный логин или пароль</div> : ''}
+      <div className={cl.header}>Login to your account</div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={cl.form__item}>
           <div className={cl.form__item_label}>Email address</div>

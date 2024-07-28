@@ -10,11 +10,20 @@ header {
   padding: 0 22px;
   margin-bottom: 50px;
 }
+header__logo {
+  color: rgba(0, 0, 0, 0.85);
+}
 
 * {
   font-size: inherit;
+  color: inherit;
 }
 
+.header__account {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 .header__account_in {
   padding: 10px 20px;
   background-color: unset;
@@ -26,18 +35,22 @@ header {
   text-decoration: none;
 }
 
-.active-link .header__account_in {
+.header__account_up {
   padding: 6px 18px;
   background-color: unset;
   border: 1px solid #52C41A;
   border-radius: 5px;
   color: #52C41A;
 }
+.header__account_up:visited {
+  color: #52C41A;
+}
 
-.header__account {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+a {
+  text-decoration: none;
+}
+a:visited {
+  color: inherit;
 }
 
 .user-image {

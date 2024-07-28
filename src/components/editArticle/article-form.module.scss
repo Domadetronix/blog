@@ -1,7 +1,14 @@
 .container {
-    width: 384px;
-    padding: 48px 32px;
+    width: 938px;
+    box-shadow: 0px 0.61px 2.93px 0px rgba(0, 0, 0, 0.0197);
+    box-shadow: 0px 1.46px 7.05px 0px rgba(0, 0, 0, 0.0283);
+    box-shadow: 0px 2.75px 13.27px 0px rgba(0, 0, 0, 0.035);
+    box-shadow: 0px 4.91px 23.68px 0px rgba(0, 0, 0, 0.0417);
+    box-shadow: 0px 9.19px 44.28px 0px rgba(0, 0, 0, 0.0503);
+    box-shadow: 0px 22px 106px 0px rgba(0, 0, 0, 0.07);
     background-color: #fff;
+    border: 1px solid rgba(217, 217, 217, 1);
+    padding: 48px 32px;
 }
 
 .header {
@@ -18,7 +25,7 @@
 
 .form {
     &__button {
-        width: 100%;
+        width: 320px;
         height: 40px;
         background-color: rgba(24, 144, 255, 1);
         font-family: Roboto;
@@ -65,10 +72,6 @@
             &:focus {
                 color: #1890FF;
                 outline: 2px solid #1890FF;
-            }
-
-            &::placeholder {
-                color: rgba(191, 191, 191, 1);
             }
         }
 
@@ -155,10 +158,56 @@ label {
     margin: 0;
 }
 
-.error-message {
-    margin-bottom: 20px;
-    background-color: #fce4e4;
-    border: 1px solid #fcc2c3;
-    padding: 20px 30px;
+.main-text-input {
+    height: 168px;
+    resize: vertical;
+}
 
+fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.tag {
+
+    // width: 300px;
+    &__item {
+        display: flex;
+        gap: 17px;
+        margin-bottom: 5px;
+
+        &_tag {
+            width: 300px;
+            border: 1px solid rgba(217, 217, 217, 1);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-family: Roboto;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+
+        }
+
+        &_button {
+            border: 1px solid rgba(245, 34, 45, 1);
+            border-radius: 4px;
+            background-color: #fff;
+            color: rgba(245, 34, 45, 1);
+            padding: 8px 36px;
+        }
+    }
+
+    &__input {
+        width: 300px;
+        font-family: Roboto;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+    }
+}
+
+.blue-button {
+    border-color: rgba(24, 144, 255, 1);
+    color: rgba(24, 144, 255, 1);
 }

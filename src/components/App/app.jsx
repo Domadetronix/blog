@@ -13,16 +13,23 @@ import Layout from '../Layout'
 import { Articlepage } from '../../pages/Articlepage'
 import { setUser } from '../../store/user-reducer'
 import Profilepage from '../../pages/Profilepage'
+import CreateArticlePage from '../../pages/CreateArticlePage'
+import EditArticlePage from '../../pages/EditArticlePage'
+import RequireAuth from '../hoc/RequireAuth'
+import RequireNotAuth from '../hoc/RequireNotAuth'
 
 export default function App() {
   const dispatch = useDispatch()
+
   useEffect(() => {
+    if (localStorage.getItem('user') === 'undefined') {
+      localStorage.removeItem('user')
+    }
     if (localStorage.getItem('user')) {
       const user = JSON.parse(localStorage.getItem('user'))
       dispatch(setUser(user))
     }
   }, [dispatch])
-
   return (
     <div className={cl.main}>
       <Routes>
@@ -30,9 +37,46 @@ export default function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/articles" element={<Homepage />} />
           <Route path="/articles/:id" element={<Articlepage />} />
-          <Route path="/sign-in" element={<SignInPage />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
-          <Route path="/profile" element={<Profilepage />} />
+          <Route
+            path="/articles/:id/edit"
+            element={
+              <RequireAuth>
+                <EditArticlePage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/sign-in"
+            element={
+              <RequireNotAuth>
+                <SignInPage />
+              </RequireNotAuth>
+            }
+          />
+          <Route
+            path="/sign-up"
+            element={
+              <RequireNotAuth>
+                <SignUpPage />
+              </RequireNotAuth>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <Profilepage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/new-article"
+            element={
+              <RequireAuth>
+                <CreateArticlePage />
+              </RequireAuth>
+            }
+          />
           <Route path="*" element={<div>Not found</div>} />
         </Route>
       </Routes>
